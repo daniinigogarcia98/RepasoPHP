@@ -13,10 +13,10 @@
         <br>
         <form action="" method="post">
         <label for="fechaE">Fecha de entrada</label><br>
-        <input type="date" name="fechaE" id="fechaE"   value="<?php echo (!empty($_POST['fechaE']) ? $_POST['fechaE'] : date('Y-m-d')) ?>" />
+        <input type="date" name="fechaE" id="fechaE" value="<?php echo (!empty($_POST['fechaE']) ? $_POST['fechaE'] : date('Y-m-d')) ?>" />
         <br><br>
         <label for="cliente">Cliente</label><br>
-        <input type="text" name="cliente" id="cliente" value="<?php echo (!empty($_POST['cliente']) ? $_POST['cliente'] : '') ?>" />
+        <input type="text" name="cliente" id="cliente"/>
         <br><br>
         <label for="prendas">Tipo de Prenda</label><br>
         <select name="prendas" id="prendas">

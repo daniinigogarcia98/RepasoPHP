@@ -1,3 +1,7 @@
 marcial;Mayor60;2025-04-07;1;Abonado;7.2
 marcial;Mayor60;2025-04-07;1;Abonado;7.2
 marcial;Mayor60;2025-04-07;1;Abonado;7.2
+Daniel;General;2025-04-07;1;;10
+juan;General;2025-04-07;4;Familia Numerosa/Abonado;34.2
+juan;General;2025-04-07;4;Familia Numerosa/Abonado;34.2
+juan;General;2025-04-07;4;Familia Numerosa/Abonado;34.2

@@ -1,0 +1,3 @@
+Daniel;Mayor60;2025-04-03;2;Abonado;14.4
+marcial;General;2025-04-03;4;Familia Numerosa;38
+juan;Mayor60;2025-04-03;1;Abonado;7.2

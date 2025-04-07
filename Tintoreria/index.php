@@ -19,23 +19,23 @@
         <input type="text" name="cliente" id="cliente" value="<?php echo (!empty($_POST['cliente']) ? $_POST['cliente'] : '') ?>" />
         <br><br>
         <label for="prendas">Tipo de Prenda</label><br>
-        <select name="prendas[]" id="prendas">
-            <option <?php echo (isset($_POST['prendas']) && $_POST['prendas'] == 'Fiesta') ?>>Fiesta</option>
-            <option <?php echo (isset($_POST['prendas']) && $_POST['prendas'] == 'Cuero') ?>>Cuero</option>
-            <option <?php echo (isset($_POST['prendas']) && $_POST['prendas'] == 'Hogar') ?>>Hogar</option>
-            <option <?php echo (isset($_POST['prendas']) && $_POST['prendas'] == 'Textil'? 'selected' : 'selected') ?>>Textil</option>
+        <select name="prendas" id="prendas">
+            <option>Fiesta</option>
+            <option>Cuero</option>
+            <option>Hogar</option>
+            <option selected="selected">Textil</option>
         </select>
         <br><br>
-        <label for="servicio">Servicio</label><br>
-        <input type="checkbox" name="limpieza" id="limpieza">
-        <label for="limpieza">Limpieza</label>
-        <input type="checkbox" name="planchado" id="planchado">
-        <label for="planchado">Planchado</label>
-        <input type="checkbox" name="desmanchado" id="desmanchado">
-        <label for="desmanchado">Desmanchado</label>
+        <label>Servicios</label><br />
+                <input type="checkbox" id="limpieza" name="servicios[]" value="limpieza" />
+                <label for="limpieza">Limpieza</label>
+                <input type="checkbox" id="planchado" name="servicios[]" value="planchado" />
+                <label for="planchado">Planchado</label>
+                <input type="checkbox" id="desmanchado" name="servicios[]" value="desmanchado" />
+                <label for="desmanchado">Desmanchado</label>
         <br><br>
         <label for="importe">Importe</label><br>
-        <input type="number" name="importe" id="importe">
+        <input type="number" name="importe" id="importe" value="1">
         <br><br>
         <button type="submit" name="guardar" id="guardar">Guardar</button>
         </form>
@@ -43,9 +43,17 @@
     </fieldset> 
     <?php
     if (isset($_POST['guardar'])) {
-        if (empty($_POST['cliente']) || !isset($_POST['fechaE']) || !isset($_POST['prendas']) || !isset($_POST['servicio']) || !isset($_POST['importe'])) {
-            echo 'Campos Vacíos';
-        } 
+    if (empty($_POST['fechaE']) or empty($_POST['cliente']) or empty($_POST['prendas']) or empty($_POST['importe']) ||!isset($_POST['servicios']) or sizeof($_POST['servicios'])<1) {
+        echo 'Debes rellenar la fecha ,cliente ,tipo de prenda,importe y el servicio';
+        $resultado=true;
+    }
+
+    if (!isset($resultado)) {
+        echo'<h1>Datos Guardados</h1>';
+        echo '<h2>Cliente:'.$_POST['cliente'].'</h2>';
+        echo '<h2>Prenda:'.$_POST['prendas'].'</h2>';
+        echo '<h2>Servicios:'.implode('/',$_POST['servicios']).'</h2>';
+    }
     }
     ?>
 </body>

@@ -8,10 +8,11 @@
 </head>
 <body>
     <h1>Tintorería La Morala</h1>
+    <form action="" method="post">
     <fieldset>
         <legend>Registrar Trabajo</legend>
         <br>
-        <form action="" method="post">
+       
         <label for="fechaE">Fecha de entrada</label><br>
         <input type="date" name="fechaE" id="fechaE"   value="<?php echo (!empty($_POST['fechaE']) ? $_POST['fechaE'] : date('Y-m-d')) ?>" />
         <br><br>
@@ -38,9 +39,8 @@
         <input type="number" name="importe" id="importe">
         <br><br>
         <button type="submit" name="guardar" id="guardar">Guardar</button>
-        </form>
-    
     </fieldset> 
+    </form>
     <?php
     if (isset($_POST['guardar'])) {
         if (empty($_POST['cliente']) || !isset($_POST['fechaE']) || !isset($_POST['prendas']) || !isset($_POST['servicio']) || !isset($_POST['importe'])) {

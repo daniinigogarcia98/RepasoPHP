@@ -1,6 +1,7 @@
 <?php
 require_once "Entrada.php";
 require_once "Modelo.php";
+$f = new Modelo;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,6 +78,7 @@ require_once "Modelo.php";
         </fieldset>
     </form>
 
+
     <!-- Ticket -->
     <fieldset class="card p-4 mt-4">
         <legend class="text-center fw-bold">Ticket</legend>
@@ -131,6 +133,35 @@ require_once "Modelo.php";
             }
         }
         ?>
+        <table class="table table-bordered mt-3">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th>Fecha</th>
+                    <th>Nº Entradas</th>
+                    <th>Descuentos</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+        <?php
+        // Mostrar los datos del fichero
+        $entradas = $f->cargarEntradas();
+
+        foreach ($entradas as $e) {
+            echo '<tr>';
+            echo '<td>' . $e->getNombreCliente() . '</td>';
+            echo '<td>' . $e->getTipoEntrada() . '</td>';
+            echo '<td>' . $e->getFechaEvento() . '</td>';
+            echo '<td>' . $e->getNEntradas() . '</td>';
+            echo '<td>' . $e->getDescuentos() . '</td>';
+            echo '<td>' . $e->getImporte() . '</td>';
+            echo '</tr>';
+        }
+        ?>
+            </tbody>
+        </table>
     </fieldset>
 </body>
 

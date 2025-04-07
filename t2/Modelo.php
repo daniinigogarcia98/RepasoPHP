@@ -23,8 +23,17 @@ class Modelo {
        
     }
 
-    function cargar(){
-        
+    function cargarEntradas(){
+        $resultado=array();
+        if (file_exists($this->fichero)) {
+            $tmp=file($this->fichero,FILE_IGNORE_NEW_LINES);
+            foreach ($tmp as $t){
+                $datos=explode(';',$t);
+                $entrada=new Entrada($datos[0],$datos[1],$datos[2],$datos[3],$datos[4],$datos[5]);
+                $resultado[]=$entrada;
+            }
+        }
+        return $resultado;
     }
 }
 ?>

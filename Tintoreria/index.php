@@ -67,7 +67,7 @@
         } elseif (
             isset($_POST["prendas"]) && $_POST['prendas'] == "Cuero" && isset($_POST['servicios']) && in_array('planchado', $_POST['servicios'])
         ) {
-            echo '<h2 style="color: red;">Las opciones Cuero y Planchado no pueden ser Seleccionadas Juntas</h2>';
+            echo '<h2 style="color: red;">La Prenda de Cuero Y El Servicio de Planchado No se Pueden Marcar Juntos</h2>';
         } elseif (isset($_POST['prendas']) && $_POST['prendas'] == 'Fiesta' && isset($_POST['importe']) && $_POST['importe'] <= 50) {
             echo '<h2 style="color:red;">El importe Minimo para Prendas de Fiesta es Minimo es de 50</h2>';
         } else {

@@ -1,8 +1,0 @@
-*{
-    box-sizing: border-box;
-}
-fieldset{
-    display: flex;
-    width: 350px;
-    height: 350px;
-}

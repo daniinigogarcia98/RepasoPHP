@@ -44,8 +44,10 @@
         </div>
         <div>
             <label for="reserva">Reserva para</label><br/>
-            <input type="radio" name="reserva" value="Menú" <?php echo (isset($_POST['reserva']) && $_POST['reserva'] == 'Menú' ? 'checked' : '') ?>/> Menú
-            <input type="radio" name="reserva" value="Carta" <?php echo (isset($_POST['reserva']) && $_POST['reserva'] == 'Carta' ? 'checked' : '') ?>/> Carta
+            <input type="radio" name="reserva" value="Menú" <?php echo (isset($_POST['reserva']) && $_POST['reserva'] == 'Menú' ? 'checked' : '') ?>/>
+            <label for="Menú">Menú</label>
+            <input type="radio" name="reserva" value="Carta" <?php echo (isset($_POST['reserva']) && $_POST['reserva'] == 'Carta' ? 'checked' : '') ?>/>
+            <label for="Carta">Carta</label>
         </div>
         <div>
             <label for="prefeciaAlim">Preferencias alimentarias:</label><br/>

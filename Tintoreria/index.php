@@ -1,4 +1,5 @@
 <?php
+require_once 'Modelo.php';
 function selecionarSelect($prendas, $selecionado)
 {
     if (isset($_POST['prendas'])) {
@@ -88,6 +89,15 @@ function selecionarSelect($prendas, $selecionado)
             echo '<h2>Prenda:' . $_POST['prendas'] . '</h2>';
             echo '<h2>Servicios:' . implode('/', $_POST['servicios']) . '</h2>';
             echo '<h2>Importe:' . $_POST['importe'] . '€</h2>';
+            $modelo = new Modelo();
+            $trabajo = new Trabajo($_POST['fechaE'],$_POST['cliente']
+                 ,$_POST['prendas'],implode('/',$_POST['servicios']),$_POST['importe']);
+            if($modelo->guardarTrabajo($trabajo)){
+                echo '<h2 style="color:green;">El Trabajo Se ha Guardado</h2>';
+            }
+            else{
+                echo '<h2 style="color:red;">Error, No se pudo Guardar el Trabajo</h2>';
+            }
         }
     }
     ?>

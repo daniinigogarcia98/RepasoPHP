@@ -1,3 +1,15 @@
+<?php
+function selecionarSelect($prendas, $selecionado)
+{
+    if (isset($_POST['prendas'])) {
+        if ($_POST['prendas'] == $prendas) {
+            echo 'selected="selected"';
+        }
+    } elseif ($selecionado) {
+        echo 'selected="selected"';
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,15 +37,15 @@
                 </div>
                 <div>
                     <label for="cliente">Cliente</label><br>
-                    <input type="text" name="cliente" id="cliente" placeholder="Introduce nombre" />
+                    <input type="text" name="cliente" id="cliente" placeholder="Introduce nombre" value="<?php echo (isset($_POST['cliente'])?$_POST['cliente']:'')?>"/>
                 </div>
                 <div>
                     <label for="prendas">Tipo de Prenda</label><br>
                     <select name="prendas" id="prendas">
-                        <option>Fiesta</option>
-                        <option>Cuero</option>
-                        <option>Hogar</option>
-                        <option selected="selected">Textil</option>
+                        <option <?php echo (isset($_POST['prendas']) && $_POST['prendas'] == 'Fiesta' ? 'selected="selected"' : '')?> <?php selecionarSelect('Fiesta',false)?>>Fiesta</option>
+                        <option <?php echo (isset($_POST['prendas']) && $_POST['prendas'] == 'Cuero' ? 'selected="selected"' : '')?> <?php selecionarSelect('Cuero',false)?>>Cuero</option>
+                        <option <?php echo (isset($_POST['prendas']) && $_POST['prendas'] == 'Hogar' ? 'selected="selected"' : '')?> <?php selecionarSelect('Hogar',false)?>>Hogar</option>
+                        <option <?php echo ((!isset($_POST['prendas'])) || (isset($_POST['prendas']) && $_POST['prendas'] == 'Textil') ? 'selected="selected"' : '')?> <?php selecionarSelect('Textil',true)?>>Textil</option>
                     </select>
                 </div>
                 <div>

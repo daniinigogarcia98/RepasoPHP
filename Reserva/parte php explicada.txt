@@ -1,0 +1,88 @@
+<?php
+// Verificamos si el formulario ha sido enviado con el botón 'Reservar'
+if (isset($_POST['reservar'])) {
+    // Comprobamos si los campos esenciales están vacíos: nombre, fecha y hora
+    if (empty($_POST['nombre']) or empty($_POST['fechaR']) or empty($_POST['hora'])) {
+        echo 'Campos Vacíos, Debes Rellenar el nombre, fecha y la hora<br>';
+    } 
+    // Verificamos que el número de personas no sea menor a 2
+    elseif ($_POST['numPersonas'] < 2) {
+        echo 'No puedes reservar con un número menor a 2 personas<br>';
+    }
+    // Verificamos que se haya seleccionado un tipo de reserva
+    elseif (empty($_POST['reserva'])) {
+        echo 'Debe seleccionar un tipo de reserva.<br>';
+    } 
+    // Comprobamos si la zona seleccionada es "Terraza" y si el número de personas es mayor a 8
+    elseif ($_POST['zonaP'] == 'Terraza' && $_POST['numPersonas'] > 8) {
+        echo 'La terraza no se puede reservar para más de 8 personas.<br>';
+    } 
+    // Verificamos que no se seleccione "Menú" y "Sin lactosa" juntos, ya que son incompatibles
+  elseif ($_POST['reserva'] == 'Menú' && in_array('Sin lactosa', $_POST['prefeciaAlim'])) {
+        echo 'No puedes seleccionar Menú y Sin lactosa juntos.<br>';
+    } 
+    // Comprobamos que no se seleccione "Terraza" y "Menú" al mismo tiempo, ya que son incompatibles
+    elseif ($_POST['zonaP'] == 'Terraza' && $_POST['reserva'] == 'Menú') {
+        echo 'No puedes seleccionar Terraza y Menú al mismo tiempo.<br>';
+    } 
+   else {
+            echo '<table border="1">';
+            echo '<tr><th>Nombre</th><td>' . $_POST['nombre'] . '</td></tr>';
+            echo '<tr><th>Fecha Reserva</th><td>' . $_POST['fechaR'] . '</td></tr>';
+            echo '<tr><th>Hora</th><td>' . $_POST['hora'] . '</td></tr>';
+            echo '<tr><th>Nº de personas</th><td>' . $_POST['numPersonas'] . '</td></tr>';
+            echo '<tr><th>Zona</th><td>' . $_POST['zonaP'] . '</td></tr>';
+            echo '<tr><th>Reserva para</th><td>' . $_POST['reserva'] . '</td></tr>';
+            echo '<tr><th>Preferencias Alimentarias</th><td>' . (empty($_POST['prefeciaAlim']) ? 'Ninguna' : implode(', ', $_POST['prefeciaAlim'])) . '</td></tr>';
+
+            echo '</table>';
+        }
+    }
+}
+?>
+Explicación detallada de cada parte del código PHP:
+if (isset($_POST['reservar'])):
+
+Esto verifica si el formulario ha sido enviado, específicamente si el botón de "Reservar" ha sido presionado. Si se presionó el botón, el bloque de código dentro de este if se ejecuta.
+
+Validación de campos vacíos (nombre, fechaR, hora):
+
+if (empty($_POST['nombre']) or empty($_POST['fechaR']) or empty($_POST['hora'])):
+
+Aquí se comprueba si el nombre, la fecha de la reserva y la hora están vacíos. Si cualquiera de estos campos está vacío, se muestra un mensaje de error.
+
+Validación del número de personas:
+
+elseif ($_POST['numPersonas'] < 2):
+
+Se asegura de que el número de personas no sea menor a 2. Si es menor, se muestra un mensaje de error.
+
+Verificación de que se haya seleccionado un tipo de reserva:
+
+elseif (empty($_POST['reserva'])):
+
+Aquí se verifica si el campo "Reserva para" (Menú o Carta) no se ha seleccionado. Si no se ha seleccionado, se muestra un mensaje de error.
+
+Validación de la zona de reserva y número de personas:
+
+elseif ($_POST['zonaP'] == 'Terraza' && $_POST['numPersonas'] > 8):
+
+Si la zona seleccionada es "Terraza" y el número de personas es mayor a 8, se muestra un error, ya que la terraza no se puede reservar para más de 8 personas.
+
+Validación de incompatibilidad entre "Menú" y "Sin lactosa":
+
+elseif ($_POST['reserva'] == 'Menú' && in_array('Sin lactosa', $_POST['prefeciaAlim'])):
+
+Si el usuario selecciona "Menú" y al mismo tiempo marca "Sin lactosa" en las preferencias alimentarias, se muestra un mensaje de error. Esto se debe a que no se pueden seleccionar ambos a la vez según la lógica del código.
+
+Verificación de incompatibilidad entre "Terraza" y "Menú":
+
+elseif ($_POST['zonaP'] == 'Terraza' && $_POST['reserva'] == 'Menú'):
+
+No se permite seleccionar "Terraza" y "Menú" al mismo tiempo, por lo que si ambas opciones son seleccionadas, se muestra un mensaje de error.
+
+Si todas las validaciones son correctas:
+
+Si no se cumplen ninguna de las condiciones de error anteriores, el código entra en el bloque else y muestra la información de la reserva en una tabla HTML. Los datos se muestran tal como fueron ingresados en el formulario.
+
+Para las preferencias alimentarias, si no se ha seleccionado ninguna, se muestra el texto "Ninguna". Si hay alguna preferencia seleccionada, estas se muestran separadas por comas.

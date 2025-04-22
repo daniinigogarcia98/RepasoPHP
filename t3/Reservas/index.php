@@ -1,10 +1,11 @@
-<?php 
+<?php
 require_once 'controlador.php';
 
 if ($bd->getConexion()==null) {
-    echo 'No se pudo establecer la conexión con la BD:'.$mensaje;
-}else {
-    # code...
+    echo ('No se ha establecio la conexion con la BD: '.$mensaje);
+}else{
+
+
 
 ?>
 
@@ -13,20 +14,17 @@ if ($bd->getConexion()==null) {
 
 <head>
     <meta charset="UTF-8">
-     
     <title>Reservas IES Augustóbriga</title>
 </head>
 
 <body>
-    <!-- Sección de Mensajes -->
-    <section>
-        <h3 style="color:red"><?php echo (isset($mensaje) ? $mensaje : '')?></h3>
+     <!-- Sección de Mensajes -->
+     <section>
+        <h3 style="color:red"><?php echo (isset($mensaje) ? $mensaje :'') ?></h3>
     </section>
-    <?php
-    if (!isset($_SESSION['usuario'])) {
-
+<?php if (!isset($_SESSION['usuario'])) {
     
-    ?>
+ ?>
     <h1>Reservas IES Augustóbriga</h1>
     <!-- Sección de Login -->
     <section>
@@ -39,13 +37,12 @@ if ($bd->getConexion()==null) {
             <button type="submit" name="acceder">Acceder</button>
         </form>
     </section>
-    <?php
-    }else{
+<?php
+}else{
 
-    
-    ?>
+
+?>
    
-
     <!-- Información de usuario logueado -->
 
     <form method="post">
@@ -64,18 +61,27 @@ if ($bd->getConexion()==null) {
                     <td>
                         <h3 style="color:blue">Color Reservas</h3>
 
-                        <input type="color" name="color" />
+                        <input type="color" name="color" value="<?php 
+                        echo (isset($_COOKIE['color'])? $_COOKIE['color']: 0);
+                        ?>"/>
                         <input type="submit" name="cambiarColor" value="cambiar" />
                     </td>
                     <td>
                         <input type="submit" name="salir" value="Salir" />
                     </td>
                 </tr>
+                <tr>
+                    <td><?php echo $_SESSION['usuario']->getIdRayuela() ?></td>
+                    <td><?php echo $_SESSION['usuario']->getNombre() ?></td>
+                    <td><?php echo $_SESSION['usuario']->getNumReservas() ?></td>
+                    <td></td>
+                </tr>
             </table>
         </section>
         <!-- Seleccionar Recurso -->
         <section>
             <h3 style="color:blue">Selecciona Recurso</h3>
+            <?php $recursos=$bd->obtenerRecursos()?>
             <select name="recurso">
             </select>
             <input type="submit" name="verR" value="verReservas" />
@@ -93,7 +99,7 @@ if ($bd->getConexion()==null) {
         <section>
             <h3 style="color:blue">Crear/Anular Reserva</h3>
             <label for="fecha">Fecha Reserva</label>
-            <input type="date" name="fecha" id="fecha"  value="<?php echo date('Y-m-d') ?>"/>
+            <input type="date" name="fecha" id="fecha" />
             <label for="hora">Hora Reserva</label>
             <select name="hora" id="hora">
                 <option value="1">Primera</option>
@@ -107,11 +113,12 @@ if ($bd->getConexion()==null) {
             <button type="submit" name="anular">Anular</button>
         </section>
     </form>
-</body>
-<?php
+<?php 
 }
 ?>
+</body>
+
 </html>
-<?php 
+<?php
 }
 ?>

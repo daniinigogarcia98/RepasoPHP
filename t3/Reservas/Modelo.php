@@ -44,17 +44,48 @@ class Modelo
 
         return $respuesta;
     }
-    function obtenerRecursos(){
-        $respuesta=array();
+    function obtenerRecursos()
+    {
+        $respuesta = array();
         try {
-            $consulta=$this->conexion->query('SELECT * from recursos');
+            $consulta = $this->conexion->query('SELECT * from recursos');
+            while ($fila = $consulta->fetch()) {
+                $respuesta[] = new Recursos($fila['id'], $fila['nombre'], $fila['tipo'], $fila['descripcion']);
+            }
         } catch (\Throwable $th) {
             global $mensaje;
             $mensaje = $th->getMessage();
         }
         return $respuesta;
     }
+    function obtenerReservas($recurso)
+    {
+        $respuesta = [];
+        try {
+            $consulta = $this->conexion->prepare('SELECT re.*,u.nombre as nombreU,r.nombre as nombreR FROM reservas as re
+                                                    join recursos as r on recurso =r.id
+                                                    join usuarios  as u on usuario=idRayuela
+                                                    where recurso = ? and anulada=false order by fecha desc');
+            $params = [$recurso];
+            if ($consulta->execute($params)) {
 
+                while ($fila = $consulta->fetch()) {
+                    $respuesta[] = new Reservas(
+                        $fila['id'],
+                        new Usuarios($fila['usuario'],$fila['nombreU'],null,null),
+                        new Recursos(null,$fila['nombreR'],null,null),
+                        $fila['fecha'],
+                        $fila['hora'],
+                        $fila['anulada']
+                    );
+                }
+            }
+        } catch (\Throwable $th) {
+            global $mensaje;
+            $mensaje = $th->getMessage();
+        }
+        return $respuesta;
+    }
     /**
      * Get the value of conexion
      */

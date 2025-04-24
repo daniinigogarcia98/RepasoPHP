@@ -102,12 +102,12 @@ if ($bd->getConexion() == null) {
                         if (isset($reservas)) {
                             foreach ($reservas as $r) {
                         ?>
-                                <tr style="color: <?php echo (isset($_COOKIE['color']) && $_SESSION['usuario']->getIdRayuela()==$r->getUsuario()->getIdRayuela() ? $_COOKIE['color']:'black')?>;">
-                                    <td><?php echo $r->getId()?></td>
-                                    <td><?php echo $r->getUsuario()->getNombre()?></td>
-                                    <td><?php echo $r->getRecurso()->getNombre()?></td>
-                                    <td><?php echo $r->getFecha()?></td>
-                                    <td><?php echo $r->getHora()?></td>
+                                <tr style="color: <?php echo (isset($_COOKIE['color']) && $_SESSION['usuario']->getIdRayuela() == $r->getUsuario()->getIdRayuela() ? $_COOKIE['color'] : 'black') ?>;">
+                                    <td><?php echo $r->getId() ?></td>
+                                    <td><?php echo $r->getUsuario()->getNombre() ?></td>
+                                    <td><?php echo $r->getRecurso()->getNombre() ?></td>
+                                    <td><?php echo $r->getFecha() ?></td>
+                                    <td><?php echo $r->getHora() ?></td>
                                 </tr>
                         <?php
                             }
@@ -121,7 +121,7 @@ if ($bd->getConexion() == null) {
                 <section>
                     <h3 style="color:blue">Crear/Anular Reserva</h3>
                     <label for="fecha">Fecha Reserva</label>
-                    <input type="date" name="fecha" id="fecha" />
+                    <input type="date" name="fecha" id="fecha" value="<?php echo (!empty($_POST['fecha']) ? $_POST['fecha'] : date('Y-m-d')) ?>" />
                     <label for="hora">Hora Reserva</label>
                     <select name="hora" id="hora">
                         <option value="1">Primera</option>

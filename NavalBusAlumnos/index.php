@@ -31,7 +31,7 @@ require_once 'controlador.php';
 			<?php
                     $lineas = $bd->obtenerLineas();
                     foreach($lineas as $l){
-                        echo '<option value="'.$l->getId().'">'.$l->getNombre().'-'.$l->getOrigen().'-'.$l->getDestino().'</option>';
+                        echo '<option value="'.$l->getId().'">'.$l->getNombre().'</option>';
                     }
                 ?>
             </select>

@@ -41,7 +41,7 @@ class Modelo
     {
         $resultado = array();
         try {
-            $consulta = $this->conexion->prepare('SELECT * from lineas');
+            $consulta = $this->conexion->prepare('SELECT * from Lineas');
             if ($consulta->execute()) {
                 while ($fila = $consulta->fetch()) {
                     $resultado[] = new Linea(
@@ -84,9 +84,7 @@ class Modelo
     {
         $resultado = null;
         try {
-            $consulta = $this->conexion->prepare(
-                'select * from conductores where id = ?'
-            );
+            $consulta = $this->conexion->prepare('select * from Conductores where id = ?');
             $params = array($codigo);
             if ($consulta->execute($params)) {
                 if ($fila = $consulta->fetch()) {
@@ -124,7 +122,7 @@ class Modelo
         $resultado = 0;
         try {
             $consulta = $this->conexion->prepare(
-                'SELECT recaudacion from servicios where conductor = ? and linea = ? and finalizado = false'
+                'SELECT recaudacion from Servicios where conductor = ? and linea = ? and finalizado = false'
             );
             $params = array($c->getId(), $l->getId());
             if ($consulta->execute($params)) {

@@ -39,11 +39,15 @@ class Modelo
 
     function obtenerLineas()
     {
+        // Inicializa un array vacío para almacenar los objetos Linea
         $resultado = array();
         try {
+              // Prepara la consulta SQL para obtener todas las filas de la tabla 'Lineas'
             $consulta = $this->conexion->prepare('SELECT * from Lineas');
             if ($consulta->execute()) {
+                  // Recorre todas las filas de la consulta
                 while ($fila = $consulta->fetch()) {
+                      // Crea un nuevo objeto Linea con los valores obtenidos de la fila
                     $resultado[] = new Linea(
                         $fila['id'],
                         $fila['nombre'],
@@ -53,20 +57,29 @@ class Modelo
                 }
             }
         } catch (PDOException $e) {
+             // Si ocurre un error en la consulta o la conexión, se captura la excepción y se muestra el mensaje de error
             echo $e->getMessage();
         }
+          // Devuelve el array con los objetos Linea creados
         return $resultado;
     }
     function obtenerLinea($codigo)
     {
+        // Inicializamos la variable $resultado con null, que será el valor por defecto en caso de no encontrar resultados.
         $resultado = null;
         try {
+             // Preparamos la consulta SQL para seleccionar todas las columnas de la tabla 'Lineas' donde el 'id' sea igual al parámetro proporcionado.
             $consulta = $this->conexion->prepare(
                 'select * from Lineas where id = ?'
             );
+             // Asignamos el valor del parámetro $codigo al array $params, que se usará para reemplazar el marcador de posición (?) en la consulta SQL.
             $params = array($codigo);
+            // Ejecutamos la consulta SQL con los parámetros proporcionados.
             if ($consulta->execute($params)) {
+                // Si la consulta se ejecuta correctamente, intentamos obtener una fila de resultados.
                 if ($fila = $consulta->fetch()) {
+                    // Si encontramos una fila, creamos un objeto de la clase 'Linea' utilizando los datos de la fila.
+                // El objeto 'Linea' se crea con los valores de las columnas 'id', 'nombre', 'origen' y 'destino'.
                     $resultado = new Linea(
                         $fila['id'],
                         $fila['nombre'],
@@ -76,8 +89,11 @@ class Modelo
                 }
             }
         } catch (PDOException $e) {
+              // Si ocurre un error en la ejecución de la consulta (por ejemplo, un error de conexión),
+        // se captura la excepción y se muestra el mensaje de error.
             echo $e->getMessage();
         }
+         // Retornamos el resultado. Si no se encontró ninguna línea o hubo un error, devolverá null.
         return $resultado;
     }
     function obtenerConductor($codigo)

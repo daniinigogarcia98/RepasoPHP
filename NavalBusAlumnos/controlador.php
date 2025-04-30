@@ -7,6 +7,8 @@ $bd = new Modelo();
 
 if ($bd->getConexion() == null) {
     $mensaje = 'No hay conexión con la BD';
+}else if($bd->getConexion()==true){
+    $mensaje = '<p style="color: green;">Conexión Establecida</p>';
 }
 
 if (isset($_POST['iniciar'])) {

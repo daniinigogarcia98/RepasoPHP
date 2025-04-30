@@ -43,8 +43,8 @@ class Modelo
         $resultado = array();
         try {
               // Prepara la consulta SQL para obtener todas las filas de la tabla 'Lineas'
-            $consulta = $this->conexion->prepare('SELECT * from Lineas');
-            if ($consulta->execute()) {
+            $consulta = $this->conexion->query('SELECT * from Lineas');
+          
                   // Recorre todas las filas de la consulta
                 while ($fila = $consulta->fetch()) {
                       // Crea un nuevo objeto Linea con los valores obtenidos de la fila
@@ -55,7 +55,7 @@ class Modelo
                         $fila['destino']
                     );
                 }
-            }
+            
         } catch (PDOException $e) {
              // Si ocurre un error en la consulta o la conexión, se captura la excepción y se muestra el mensaje de error
             echo $e->getMessage();

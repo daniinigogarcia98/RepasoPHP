@@ -50,7 +50,7 @@ if (isset($_POST['iniciar'])) {
         if ($bd->finalizarServicio($_SESSION['conductor'], $_SESSION['linea'])) {
             session_destroy();
             header('Location: index.php');
-            exit(); // Importante detener
+            exit();
         } else {
             $mensaje = 'Error al finalizar el servicio';
         }

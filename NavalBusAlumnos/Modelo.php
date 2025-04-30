@@ -62,7 +62,7 @@ class Modelo
         $resultado = null;
         try {
             $consulta = $this->conexion->prepare(
-                'select * from lineas where id = ?'
+                'select * from Lineas where id = ?'
             );
             $params = array($codigo);
             if ($consulta->execute($params)) {
@@ -106,7 +106,7 @@ class Modelo
         $resultado = false;
         try {
             $consulta = $this->conexion->prepare(
-                'INSERT into servicios values (default,now(),?,?,0,false)'
+                'INSERT into Servicios values (default,now(),?,?,0,false)'
             );
             $params = array($l->getId(), $c->getId());
             if ($consulta->execute($params) and $consulta->rowCount() == 1) {
@@ -140,7 +140,7 @@ class Modelo
         $resultado = array();
         try {
             $consulta = $this->conexion->prepare(
-                'select * from billetes inner join lineas on linea = lineas.id where conductor = ?'
+                'select * from Billetes inner join Lineas on linea = Lineas.id where conductor = ?'
             );
             $params = array($c->getId());
             if ($consulta->execute($params)) {
@@ -166,12 +166,12 @@ class Modelo
         try {
             $this->conexion->beginTransaction();
             $consulta = $this->conexion->prepare(
-                'INSERT into billetes values (default,?,?,now(),?,?)'
+                'INSERT into Billetes values (default,?,?,now(),?,?)'
             );
             $params = array($c->getId(), $l->getId(), $tipo, $precio);
             if ($consulta->execute($params) and $consulta->rowCount() == 1) {
                 $consulta = $this->conexion->prepare(
-                    'UPDATE servicios set recaudacion=recaudacion + ? where conductor = ? and linea = ? and finalizado = false'
+                    'UPDATE Servicios set recaudacion=recaudacion + ? where conductor = ? and linea = ? and finalizado = false'
                 );
                 $params = array($precio, $c->getId(), $l->getId());
                 if ($consulta->execute($params) and $consulta->rowCount() == 1) {
@@ -208,7 +208,7 @@ class Modelo
         $resultado = false;
         try {
             $consulta = $this->conexion->prepare(
-                'UPDATE servicios set finalizado=true where conductor = ? and linea = ? and finalizado = false'
+                'UPDATE Servicios set finalizado=true where conductor = ? and linea = ? and finalizado = false'
             );
             $params = array($c->getId(), $l->getId());
             if ($consulta->execute($params) and $consulta->rowCount() == 1) {

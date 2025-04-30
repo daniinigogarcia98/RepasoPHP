@@ -37,7 +37,7 @@ if (isset($_POST['iniciar'])) {
     if (!isset($_SESSION['conductor']) || !isset($_SESSION['linea'])) {
         $mensaje = 'Sesión no iniciada para vender billete';
     } else {
-        $tipo = $_POST['tipo'] ?? 'General'; // Valor por defecto
+        $tipo = $_POST['tipo'] ?? 'General'; 
         $precio = $bd->obtenerPrecio($tipo);
         if ($bd->venderBillete($_SESSION['conductor'], $_SESSION['linea'], $tipo, $precio)) {
             $mensaje = 'Billete vendido';
